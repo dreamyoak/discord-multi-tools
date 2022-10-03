@@ -5,7 +5,7 @@ import time
 from colorama import Fore
 import requests
 author = 'dynasty'
-github = ''
+github = 'https://github.com/j0taro/webhook-spammer-deleter'
 wise = '"Invalid Webhook Token"'
 haha = '"Unknown Webhook"'
 fr = Center.XCenter(''' 
