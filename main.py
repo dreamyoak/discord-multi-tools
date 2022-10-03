@@ -4,8 +4,8 @@ import os
 import time
 from colorama import Fore
 import requests
-author = 'dynasty'
-github = 'https://github.com/j0taro/webhook-spammer-deleter'
+__author__ = "dynasty"
+__github__ = "https://github.com/j0taro/webhook-spammer-deleter"
 wise = '"Invalid Webhook Token"'
 haha = '"Unknown Webhook"'
 fr = Center.XCenter(''' 
@@ -15,6 +15,8 @@ fr = Center.XCenter('''
 ██╔══╝░░██╔══██╗  ░╚═══██╗██╔═══╝░██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝░░██╔══██╗
 ██║░░░░░██║░░██║  ██████╔╝██║░░░░░██║░░██║██║░╚═╝░██║██║░╚═╝░██║███████╗██║░░██║
 ╚═╝░░░░░╚═╝░░╚═╝  ╚═════╝░╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚═╝ \n\n\n''')
+
+
 shit = '''
 [1] webhook spammer
 [2] webhook deleter idc '''
@@ -28,8 +30,8 @@ def main():
      webhook = input("webhook url >: ")
      oak = webhook
      try:
-      tree = requests.get(oak) #webhook checker -> https://github.com/j0taro/webhook-checker
-      if wise in tree.text or haha in tree.text:
+      tree = requests.get(oak)
+      if wise in tree.text or haha in tree.text or 'discord.com/api/webhooks' not in webhook:
        print('invaild webhook fr')
        os.system("pause")
        main()
@@ -40,7 +42,7 @@ def main():
         lmao = requests.post(webhook, json={'content': ong}, headers={'Content-Type': 'application/json'})
         if lmao.status_code == 204:
             print(f"{Fore.GREEN}[+] Sent {ong}")
-     except:
+     except Exception as e:
       print('invaild webhook')
       os.system("pause")
       main()
@@ -50,7 +52,7 @@ def main():
      oak = webhook
      try:
       tree = requests.get(oak)
-      if wise in tree.text or haha in tree.text:
+      if wise in tree.text or haha in tree.text or 'discord.com/api/webhooks' not in webhook:
        print('invaild webhook fr')
        os.system("pause")
        main()
@@ -60,7 +62,7 @@ def main():
        print(f"{Fore.GREEN}webhook deleted fr")
        time.sleep(3)
        main()
-     except:
+     except Exception as e:
       print('invaild webhook')
       os.system("pause")
       main()
