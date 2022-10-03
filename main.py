@@ -28,7 +28,7 @@ def main():
      webhook = input("webhook url >: ")
      oak = webhook
      try:
-      tree = requests.get(oak)
+      tree = requests.get(oak) #webhook checker -> https://github.com/j0taro/webhook-checker
       if wise in tree.text or haha in tree.text:
        print('invaild webhook fr')
        os.system("pause")
