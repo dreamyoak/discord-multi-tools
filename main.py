@@ -2,6 +2,7 @@ from dhooks import Webhook, Embed
 from pystyle import Colors, Colorate, Center
 import os
 import time
+from time import sleep
 from colorama import Fore
 import requests
 __author__ = "dynasty"
@@ -38,14 +39,21 @@ def main():
       else:
        print(f'{Fore.GREEN}vaild webhook fr')
        ong = input("Message >: ")
+       count = 1
        while True:
         lmao = requests.post(webhook, json={'content': ong}, headers={'Content-Type': 'application/json'})
-        if lmao.status_code == 204:
-            print(f"{Fore.GREEN}[+] Sent {ong}")
+        if lmao.status_code == 204 or lmao.status_code == 200:
+                print(f"{Fore.GREEN}[+] Sent {ong} [{count}]")
+                count += 1
+        elif lmao.status_code == 429:
+                print(f"{Fore.RED}rate limited fr ({lmao.json()['retry_after'] / 1000}s){Fore.RESET}")
+                sleep(lmao.json()["retry_after"] / 1000)
+
      except Exception as e:
-      print('invaild webhook')
-      os.system("pause")
-      main()
+       print(e)
+       print('invaild webhook')
+       os.system("pause")
+       main()
             
     if ye == '2':
      webhook = input("webhook url >: ")
