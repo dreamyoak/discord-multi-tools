@@ -86,7 +86,7 @@ def main():
     if ye == '4':
       token2()
     if ye == '5':
-     webhook = input('webhook url >:') #token checker by dynasty https://github.com/j0taro/webhook-checker
+     webhook = input('webhook url >:') #webhook checker by dynasty https://github.com/j0taro/webhook-checker
      wise = '"Invalid Webhook Token"'
      haha = '"Unknown Webhook"'
      oak = webhook
