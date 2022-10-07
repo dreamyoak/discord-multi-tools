@@ -36,6 +36,8 @@ def main():
      print(f"{Fore.RED}Press CTRL+C to Exit when finished with the Spammer!")
      time.sleep(1.3)
      webhook = input("webhook url >: ")
+     wise = '"Invalid Webhook Token"'
+     haha = '"Unknown Webhook"'
      oak = webhook
      try:
       tree = requests.get(oak)
@@ -57,13 +59,14 @@ def main():
                 sleep(lmao.json()["retry_after"] / 1000)
 
      except Exception as e:
-       print(e)
        print('invaild webhook')
        os.system("pause")
        main()
             
     if ye == '2':
      webhook = input("webhook url >: ")
+     wise = '"Invalid Webhook Token"'
+     haha = '"Unknown Webhook"'
      oak = webhook
      try:
       tree = requests.get(oak)
