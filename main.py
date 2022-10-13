@@ -11,7 +11,7 @@ from colorama import Fore
 from random import randint
 import requests
 __author__ = "dynasty"
-__github__ = "https://github.com/j0taro/webhook-spammer-deleter"
+__github__ = "https://github.com/j0taro/discord-multi-tools"
 wise = '"Invalid Webhook Token"'
 haha = '"Unknown Webhook"'
 fr = Center.XCenter('''
@@ -22,7 +22,7 @@ fr = Center.XCenter('''
 ██║░░░░░██║░░██║  ██████╔╝██║░░░░░██║░░██║██║░╚═╝░██║██║░╚═╝░██║███████╗██║░░██║
 ╚═╝░░░░░╚═╝░░╚═╝  ╚═════╝░╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚═╝
 by: dynasty
-github: https://github.com/j0taro/webhook-spammer-deleter \n\n''')
+github: https://github.com/j0taro/discord-multi-tools \n\n''')
 
 
 shit = '''
