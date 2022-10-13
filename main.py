@@ -1,7 +1,10 @@
 from dhooks import Webhook, Embed
 from pystyle import Colors, Colorate, Center
 import os
+import socket
+import struct
 import time
+import random
 from datetime import datetime
 from time import sleep
 from colorama import Fore
@@ -11,23 +14,24 @@ __author__ = "dynasty"
 __github__ = "https://github.com/j0taro/webhook-spammer-deleter"
 wise = '"Invalid Webhook Token"'
 haha = '"Unknown Webhook"'
-fr = Center.XCenter(''' 
+fr = Center.XCenter('''
 ███████╗██████╗░  ░██████╗██████╗░░█████╗░███╗░░░███╗███╗░░░███╗███████╗██████╗░
 ██╔════╝██╔══██╗  ██╔════╝██╔══██╗██╔══██╗████╗░████║████╗░████║██╔════╝██╔══██╗
 █████╗░░██████╔╝  ╚█████╗░██████╔╝███████║██╔████╔██║██╔████╔██║█████╗░░██████╔╝
 ██╔══╝░░██╔══██╗  ░╚═══██╗██╔═══╝░██╔══██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝░░██╔══██╗
 ██║░░░░░██║░░██║  ██████╔╝██║░░░░░██║░░██║██║░╚═╝░██║██║░╚═╝░██║███████╗██║░░██║
-╚═╝░░░░░╚═╝░░╚═╝  ╚═════╝░╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚═╝ 
+╚═╝░░░░░╚═╝░░╚═╝  ╚═════╝░╚═╝░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚═╝
 by: dynasty
 github: https://github.com/j0taro/webhook-spammer-deleter \n\n''')
- 
+
 
 shit = '''
-[1] webhook spammer
-[2] webhook deleter idc 
+[1] Webhook spammer
+[2] Webhook deleter idc
 [3] Token checker
 [4] Token info
-[5] webhook checker'''
+[5] Webhook checker
+[6] Random ip generator'''
 def main():
     os.system('cls')
     print(Colorate.Vertical(Colors.blue_to_red,fr+shit))
@@ -62,7 +66,7 @@ def main():
        print('invaild webhook')
        os.system("pause")
        main()
-            
+
     if ye == '2':
      webhook = input("webhook url >: ")
      wise = '"Invalid Webhook Token"'
@@ -99,30 +103,33 @@ def main():
        os.system('cls')
        print('invaild webhook fr')
        input("Press Enter to continue...")
-       main() 
+       main()
       else:
        os.system('cls')
        print('vaild webhook fr')
        input("Press Enter to continue...")
-       main() 
+       main()
      except Exception as e:
       os.system('cls')
       print('invaild webhook')
       input("Press Enter to continue...")
-      main() 
+      main()
+    if ye == '6':
+        print(Fore.GREEN+socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff))))
+        time.sleep(4)
+        main()
 
-    
     else:
      print('invaild option please try again')
      time.sleep(3)
      main()
- 
+
 
 def token():
     a1 = input('Token >: ')
     f = a1
     token = f.replace('"','')
-    print(f'{Fore.GREEN}Checking '+token)    
+    print(f'{Fore.GREEN}Checking '+token)
     headers = {'Authorization':token}
     r = requests.get(f"https://discord.com/api/v6/auth/login", headers=headers)
     status = r.status_code
@@ -131,12 +138,12 @@ def token():
                 time.sleep(5)
                 main()
     if "You need to verify your account in order to perform this action." in r.text:
-                print(f'{Fore.WHITE}[{Fore.LIGHTRED_EX} ERROR {Fore.RESET}]: {Fore.BLUE} token locked lol')    
+                print(f'{Fore.WHITE}[{Fore.LIGHTRED_EX} ERROR {Fore.RESET}]: {Fore.BLUE} token locked lol')
                 time.sleep(5)
                 main()
     else:
-                 
-                print(f'{Fore.WHITE}[{Fore.LIGHTRED_EX} ERROR {Fore.RESET}]: {Fore.RED} token invaild ')    
+
+                print(f'{Fore.WHITE}[{Fore.LIGHTRED_EX} ERROR {Fore.RESET}]: {Fore.RED} token invaild ')
                 time.sleep(5)
                 main()
 
@@ -183,15 +190,15 @@ def token2():
     }
 
     cc_digits = {
-        'american express': '3',
-        'visa': '4',
-        'mastercard': '5'
+        f'{Fore.GREEN}american express{Fore.RED}': '3',
+        f'{Fore.GREEN}visa': f'{Fore.RED}4',
+        f'{Fore.GREEN}mastercard{Fore.RED}': '5'
     }
 
     try:
         res = requests.get('https://discordapp.com/api/v6/users/@me', headers=headers)
     except:
-        input(f"""          [{Fore.RED }ERROR""")
+        input(f"""{Fore.RED}ERROR""")
         main()
 
     if res.status_code == 200:
@@ -206,7 +213,7 @@ def token2():
         flags = res_json['flags']
         locale = res_json['locale']
         verified = res_json['verified']
-        
+
         language = languages.get(locale)
         from datetime import datetime
         creation_date = datetime.utcfromtimestamp(((int(user_id) >> 22) + 1420070400000) / 1000).strftime('%d-%m-%Y %H:%M:%S UTC')
@@ -237,61 +244,61 @@ def token2():
                 cc_last = x['last_4']
                 cc_month = str(x['expires_month'])
                 cc_year = str(x['expires_year'])
-                
+
                 data = {
-                    'Payment Type': 'Credit Card',
-                    'Valid': not x['invalid'],
-                    'CC Holder Name': name,
-                    'CC Brand': cc_brand.title(),
-                    'CC Number': ''.join(z if (i + 1) % 2 else z + ' ' for i, z in enumerate((cc_first if cc_first else '*') + ('*' * 11) + cc_last)),
-                    'CC Exp. Date': ('0' + cc_month if len(cc_month) < 2 else cc_month) + '/' + cc_year[2:4],
-                    'Address 1': address_1,
-                    'Address 2': address_2 if address_2 else '',
-                    'City': city,
-                    'Postal Code': postal_code,
-                    'State': state if state else '',
-                    'Country': country,
-                    'Default Payment Method': x['default']
+                    f'{Fore.GREEN}Payment Type{Fore.RED}': 'Credit Card',
+                    f'{Fore.GREEN}Valid{Fore.RED}': not x['invalid'],
+                    f'{Fore.GREEN}CC Holder Name{Fore.RED} ': name,
+                    f'{Fore.GREEN}CC Brand{Fore.RED}': cc_brand.title(),
+                    f'{Fore.GREEN}CC Number{Fore.RED}': ''.join(z if (i + 1) % 2 else z + ' ' for i, z in enumerate((cc_first if cc_first else '*') + ('*' * 11) + cc_last)),
+                    f'{Fore.GREEN}CC Exp. Date{Fore.RED}': ('0' + cc_month if len(cc_month) < 2 else cc_month) + '/' + cc_year[2:4],
+                    f'{Fore.GREEN}Address 1{Fore.RED}': address_1,
+                    f'{Fore.GREEN}Address 2{Fore.RED}': address_2 if address_2 else '',
+                    f'{Fore.GREEN}City{Fore.RED}': city,
+                    f'{Fore.GREEN}Postal Code{Fore.RED}': postal_code,
+                    f'{Fore.GREEN}State{Fore.RED}': state if state else '',
+                    f'{Fore.GREEN}Country{Fore.RED}': country,
+                    f'{Fore.GREEN}Default Payment Method{Fore.RED}': x['default']
                 }
 
             elif x['type'] == 2:
                 data = {
-                    'Payment Type': 'PayPal',
-                    'Valid': not x['invalid'],
-                    'PayPal Name': name,
-                    'PayPal Email': x['email'],
-                    'Address 1': address_1,
-                    'Address 2': address_2 if address_2 else '',
-                    'City': city,
-                    'Postal Code': postal_code,
-                    'State': state if state else '',
-                    'Country': country,
-                    'Default Payment Method': x['default']
+                    f'{Fore.GREEN}Payment Type{Fore.RED}': 'PayPal',
+                    f'{Fore.GREEN}Valid{Fore.RED}': not x['invalid'],
+                    f'{Fore.GREEN}PayPal Name{Fore.RED}': name,
+                    f'{Fore.GREEN}PayPal Email{Fore.RED}': x['email'],
+                    f'{Fore.GREEN}Address 1{Fore.RED}': address_1,
+                    f'{Fore.GREEN}Address 2{Fore.RED}': address_2 if address_2 else '',
+                    f'{Fore.GREEN}City{Fore.RED}': city,
+                    f'{Fore.GREEN}Postal Code{Fore.RED}': postal_code,
+                    f'{Fore.GREEN}State{Fore.RED}': state if state else '',
+                    f'{Fore.GREEN}Country{Fore.RED}': country,
+                    f'{Fore.GREEN}Default Payment Method{Fore.RED}': x['default']
                 }
 
             billing_info.append(data)
 
-        print(f"""\nBasic Information:""")
-        print(f"""          Username: {user_name}""")
-        print(f"""          User ID: {user_id}""")
-        print(f"""          Creation Date: {creation_date}""")
-        print(f"""          Avatar URL: {avatar_url if avatar_id else ""}""")
-        print(f"""          Token: {token}""")
-        
-        print(f"""Nitro Information:""")
-        print(f"""           Nitro Status: {has_nitro}""")
+        print(f"""{Fore.BLUE}\nBasic Information:""")
+        print(f"""          {Fore.GREEN}Username:{Fore.RED} {user_name}""")
+        print(f"""          {Fore.GREEN}User ID: {Fore.RED}{user_id}""")
+        print(f"""          {Fore.GREEN}Creation Date: {Fore.RED}{creation_date}""")
+        print(f"""          {Fore.GREEN}Avatar URL: {Fore.RED}{avatar_url if avatar_id else ""}""")
+        print(f"""          {Fore.GREEN}Token: {Fore.RED}{token}""")
+
+        print(f"""{Fore.BLUE}Nitro Information:""")
+        print(f"""           {Fore.GREEN}Nitro Status: {Fore.RED}{has_nitro}""")
 
         if has_nitro:
-            print(f"""           Expires in: {days_left} day(s)""")
+            print(f"""           {Fore.GREEN}Expires in: {Fore.RED}{days_left} day(s)""")
         else:
-            print(f"""           Expires in: None day(s)""")
+            print(f"""           {Fore.GREEN}Expires in: {Fore.RED}None day(s)""")
 
-        print(f"""Contact Information:""")
-        print(f"""           Phone Number: {phone_number if phone_number else ""}""")
-        print(f"""           Email: {email if email else ""}""")
+        print(f"""{Fore.BLUE}Contact Information:""")
+        print(f"""           {Fore.GREEN}Phone Number: {Fore.RED}{phone_number if phone_number else ""}""")
+        print(f"""           {Fore.GREEN}Email: {Fore.RED}{email if email else ""}""")
 
         if len(billing_info) > 0:
-            print(f"""Billing Information:""")
+            print(f"""{Fore.BLUE}Billing Information:""")
             if len(billing_info) == 1:
                 for x in billing_info:
                     for key, val in x.items():
@@ -301,7 +308,7 @@ def token2():
 
             else:
                 for i, x in enumerate(billing_info):
-                    title = f'Payment Method {i + 1} ({x["Payment Type"]})'
+                    title = f'{Fore.BLUE}Payment Method {i + 1} ({x["Payment Type"]})'
                     print('    ' + title)
                     print('    ' + ('=' * len(title)))
                     for j, (key, val) in enumerate(x.items()):
@@ -314,12 +321,12 @@ def token2():
 
             print(' ')
 
-        print(f"""Account Security:""")
-        print(f"""           2FA/MFA Enabled: {mfa_enabled}""")
-        print(f"""           Flags: {flags}""")
-        print(f"""           Other:""")
-        print(f"""           Locale: {locale} ({language})""")
-        print(f"""           Email Verified: {verified}""")
+        print(f"""{Fore.BLUE}Account Security:""")
+        print(f"""           {Fore.GREEN}2FA/MFA Enabled: {Fore.RED}{mfa_enabled}""")
+        print(f"""           {Fore.GREEN}Flags: {Fore.RED}{flags}""")
+        print(f"""           {Fore.GREEN}Other:{Fore.RED}""")
+        print(f"""           {Fore.GREEN}Locale:{Fore.RED} {locale} ({language})""")
+        print(f"""           {Fore.GREEN}Email Verified:{Fore.RED} {verified}""")
 
     elif res.status_code == 401:
         print(f"""{Fore.LIGHTRED_EX }Invalid token""")
@@ -329,7 +336,7 @@ def token2():
     else:
         input(f"""[{Fore.LIGHTRED_EX }An error occurred while sending request""")
         main()
-    
+
     input(f""" Press ENTER to exit""")
     main()
 
