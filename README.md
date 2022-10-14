@@ -1,7 +1,7 @@
 ## FR SPAMMER  
 
 [-] Webhook spammer  
-[-] Webhook deleter idc  
+[-] Webhook deleter  
 [-] Token checker  
 [-] Token info  
 [-] Webhook checker  
